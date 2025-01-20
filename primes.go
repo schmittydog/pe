@@ -145,6 +145,17 @@ func (p Primes) Divisors(n int) []int {
 	return divisors
 }
 
+// Totient returns the euler totient of n
+func (p Primes) Totient(n int) int {
+	tups := p.FactorTuples(n)
+	for _, tup := range tups {
+		p := tup[0]
+		n *= p-1
+		n /= p
+	}
+	return n
+}
+
 // NewPrimes returns a Primes struct initialized for max size n
 func NewPrimes(n int) Primes {
 	max := n
