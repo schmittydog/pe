@@ -1,6 +1,7 @@
 package pe
 
 // BSIsIn binsearches for int value in sorted array
+// ([]int{1,3,7,33,67,101,199}, 3)) -> true
 func BSIsIn(arr []int, value int) bool {
 	if len(arr) == 0 {
 		return false
@@ -8,10 +9,10 @@ func BSIsIn(arr []int, value int) bool {
 	l, r := 0, len(arr)
 	for r > l {
 		m := (r + l) / 2
-		if arr[m] > value {
-			r = m
+		if arr[m] < value {
+			l = m + 1	
 		} else {
-			l = m + 1
+			r = m
 		}
 	}
 	return arr[l] == value
