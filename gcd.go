@@ -9,7 +9,7 @@ func GCD(a, b int) int {
 	if b%a == 0 {
 		return a
 	}
-	return GCD(b%a,a)
+	return GCD(b%a, a)
 }
 
 // Returns GCD of a slice of numbers

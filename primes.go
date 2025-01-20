@@ -100,16 +100,49 @@ func (p Primes) PrimeGenerator(n int, intChan chan int) {
 func (p Primes) FactorTuples(n int) [][]int {
 	factors := p.Factors(n)
 	tuples := [][]int{}
-	tuples = append(tuples, []int{factors[0],1})
+	tuples = append(tuples, []int{factors[0], 1})
 	for i := 1; i < len(factors); i++ {
 		f := factors[i]
 		if tuples[len(tuples)-1][0] == f {
 			tuples[len(tuples)-1][1]++
 		} else {
-			tuples = append(tuples, []int{f,1})
+			tuples = append(tuples, []int{f, 1})
 		}
 	}
 	return tuples
+}
+
+func (p Primes) helperDivisors(tuples [][]int, n int, ch chan int) {
+	if len(tuples) == 0 {
+		ch <- n
+		return
+	}
+	p, exps := tuples[0][0], tuples[0][1]
+	for exp := 0; exp <= exps; exp++ {
+		p.helperDivisors(tuples[1:], n*Pow(p, exp), ch)
+	}
+}
+
+// Divisors returns sorted divisors for n
+// e.g. 12 -> [1 2 3 4 6 12]
+func (p Primes) Divisors(n int) []int {
+	tuples := p.FactorTuples(n)
+	numDivisors := 1
+	for _, t := range tuples {
+		numDivisors *= t[1] + 1
+	}
+
+	divisors := []int{}
+
+	ch := make(chan int)
+	go p.helperDivisors(tuples, n, ch)
+	for d := 0; d < numDivisors; d++ {
+		divisors = append(divisors, <-ch)
+	}
+	close(ch)
+
+	sort.Ints(divisors)
+	return divisors
 }
 
 // NewPrimes returns a Primes struct initialized for max size n

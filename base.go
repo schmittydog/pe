@@ -26,4 +26,3 @@ func Base(b, n int) []int {
 	}
 	return arr
 }
-		
