@@ -27,7 +27,7 @@ func BSRight(arr []int, value int) int {
         l, r := 0, len(arr)
         for r > l {
                 m := (r + l) / 2
-                if arr[m] > value {
+                if arr[m] >= value {
                         r = m
                 } else {
                         l = m + 1
