@@ -5,12 +5,10 @@ func BSIsIn(arr []int, value int) bool {
 	if len(arr) == 0 {
 		return false
 	}
-	l, r := 0, len(arr)-1
+	l, r := 0, len(arr)
 	for r > l {
 		m := (r + l) / 2
-		if arr[m] == value {
-			return true
-		} else if arr[m] > value {
+		if arr[m] > value {
 			r = m
 		} else {
 			l = m + 1
@@ -36,7 +34,7 @@ func BSRight(arr []int, value int) int {
                         l = m + 1
                 }
         }
-        return l
+        return l + 1
 }
 
 // BSLeft bisect left
