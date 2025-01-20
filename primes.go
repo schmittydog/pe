@@ -117,9 +117,9 @@ func (p Primes) helperDivisors(tuples [][]int, n int, ch chan int) {
 		ch <- n
 		return
 	}
-	p, exps := tuples[0][0], tuples[0][1]
+	prime, exps := tuples[0][0], tuples[0][1]
 	for exp := 0; exp <= exps; exp++ {
-		p.helperDivisors(tuples[1:], n*Pow(p, exp), ch)
+		p.helperDivisors(tuples[1:], n*Pow(prime, exp), ch)
 	}
 }
 
