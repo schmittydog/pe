@@ -1,5 +1,9 @@
 package pe
 
+import (
+	"fmt"
+)
+
 // Returns GCD of two integers
 func GCD(a, b int) int {
 	if b%a == 0 {
