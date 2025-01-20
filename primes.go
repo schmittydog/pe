@@ -16,7 +16,7 @@ type Primes struct {
 }
 
 // Checks request is in the sieve's range. Bails if not
-func (p Primes) InRange(n int) {
+func (p Primes) inRange(n int) {
 	if n < 2 || n > p.max {
 		log.Fatalf("%d is not valid in sieve range of %d to %d\n", n, 2, p.max)
 	}
@@ -24,7 +24,7 @@ func (p Primes) InRange(n int) {
 
 // IsPrime returns true if prime, otherwise false
 func (p Primes) IsPrime(n int) bool {
-	p.InRange(n)
+	p.inRange(n)
 
 	if n%2 == 0 {
 		return false
@@ -35,7 +35,7 @@ func (p Primes) IsPrime(n int) bool {
 
 // Factors returns a list of prime factors with duplicates e.g. 24 returns []int{2,2,2,3}
 func (p Primes) Factors(n int) []int {
-	p.InRange(n)
+	p.inRange(n)
 
 	factors := []int{}
 	for n%2 == 0 {
@@ -61,7 +61,7 @@ func (p Primes) Factors(n int) []int {
 
 // PrimesTo returns a chan of int which delivers prime numbers up to and including n
 func (p Primes) PrimesTo(n int) chan int {
-	p.InRange(n)
+	p.inRange(n)
 
 	intChan := make(chan int)
 	go p.PrimeGenerator(n, intChan)
@@ -73,7 +73,7 @@ func (p Primes) PrimesBelow(n int) int {
 	if n <= 2 {
 		return 0
 	}
-	p.InRange(n)
+	p.inRange(n)
 
 	maxIndex := n / 2
 	count := 1

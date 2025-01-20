@@ -7,3 +7,15 @@ func GCD(a, b int) int {
 	}
 	return GCD(b%a,a)
 }
+
+// Returns GCD of a slice of numbers
+func GCDArray(arr []int) int {
+	if len(arr) == 0 {
+		log.Fataln("Send empty slice")
+	}
+	gcd := arr[0]
+	for i := 1; i < len(arr); i++ {
+		gcd = GCD(gcd, arr[i])
+	}
+	return gcd
+}
