@@ -150,10 +150,26 @@ func (p Primes) Totient(n int) int {
 	tups := p.FactorTuples(n)
 	for _, tup := range tups {
 		p := tup[0]
-		n *= p-1
+		n *= p - 1
 		n /= p
 	}
 	return n
+}
+
+// Legendere returns factor tups for factorial
+// legendere(10) ->[[2 8] [3 4] [5 2] [7 1]]
+func (p Primes) Legendere(n int) [][]int {
+	factorTups := [][]int{}
+	for p := range p.PrimesTo(n) {
+		count := 0
+		N := n
+		for N > 0 {
+			count += N / p
+			N /= p
+		}
+		factorTups = append(factorTups, []int{p, count})
+	}
+	return factorTups
 }
 
 // NewPrimes returns a Primes struct initialized for max size n
