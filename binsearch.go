@@ -30,9 +30,9 @@ func BSRight(arr []int, value int) int {
                 if arr[m] == value {
                         return m
                 } else if arr[m] > value {
-                        r = m
+                        r = m - 1
                 } else {
-                        l = m + 1
+                        l = m
                 }
         }
         return l + 1
