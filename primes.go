@@ -147,11 +147,13 @@ func (p Primes) Divisors(n int) []int {
 
 // Totient returns the euler totient of n
 func (p Primes) Totient(n int) int {
-	tups := p.FactorTuples(n)
-	for _, tup := range tups {
-		p := tup[0]
-		n *= p - 1
-		n /= p
+	facs := p.Factors(n)
+	for idx, fac := range facs {
+		if idx == 0 || fac != facs[idx-1] {
+			n *= fac - 1
+			n /= fac
+			continue
+		}
 	}
 	return n
 }
