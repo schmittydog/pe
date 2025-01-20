@@ -42,19 +42,19 @@ func BSRight(arr []int, value int) int {
 // BSLeft bisect left
 func BSLeft(arr []int, value int) int {
         if len(arr) == 0 {
-                return false
+                return 0
         }
         l, r := 0, len(arr)-1
         for r > l {
                 m := (r + l) / 2
                 if arr[m] == value {
-                        return true
+                        return m
                 } else if arr[m] > value {
                         r = m
                 } else {
                         l = m + 1
                 }
         }
-        return arr[l] == value
+        return l
 }
 
