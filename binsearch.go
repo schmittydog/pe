@@ -44,12 +44,10 @@ func BSLeft(arr []int, value int) int {
         l, r := 0, len(arr)-1
         for r > l {
                 m := (r + l) / 2
-                if arr[m] == value {
-                        return m
-                } else if arr[m] > value {
-                        r = m
-                } else {
+                if arr[m] < value {
                         l = m + 1
+                } else {
+                        r = m
                 }
         }
         return l
