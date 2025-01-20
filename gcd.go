@@ -1,7 +1,7 @@
 package pe
 
 import (
-	"fmt"
+	"log"
 )
 
 // Returns GCD of two integers
