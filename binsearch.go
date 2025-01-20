@@ -27,15 +27,13 @@ func BSRight(arr []int, value int) int {
         l, r := 0, len(arr)
         for r > l {
                 m := (r + l) / 2
-                if arr[m] == value {
-                        return m
-                } else if arr[m] > value {
-                        r = m - 1
+                if arr[m] > value {
+                        r = m
                 } else {
-                        l = m
+                        l = m + 1
                 }
         }
-        return l + 1
+        return l
 }
 
 // BSLeft bisect left
