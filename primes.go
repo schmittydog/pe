@@ -95,6 +95,23 @@ func (p Primes) PrimeGenerator(n int, intChan chan int) {
 	close(intChan)
 }
 
+// FactorTuples returns a list of prime factors and their counts
+// e.g. 24 -> [[2 3] [3 1]]  2**3 * 3**1
+func (p Primes) FactorTuples(n int) [][]int {
+	factors := p.Factors(n)
+	tuples := [][]int{}
+	tuples = append(tuples, []int{factors[0],1})
+	for i := 1; i < len(factors); i++ {
+		f := factors[i]
+		if tuples[len(tuples)-1][0] == f {
+			tuples[len(tuples)-1][1]++
+		} else {
+			tuples = append(tuples, []int{f,1})
+		}
+	}
+	return tuples
+}
+
 // NewPrimes returns a Primes struct initialized for max size n
 func NewPrimes(n int) Primes {
 	max := n
