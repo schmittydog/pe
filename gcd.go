@@ -15,7 +15,7 @@ func GCD(a, b int) int {
 // Returns GCD of a slice of numbers
 func GCDArray(arr []int) int {
 	if len(arr) == 0 {
-		log.Fataln("Send empty slice")
+		log.Fatalln("Send empty slice")
 	}
 	gcd := arr[0]
 	for i := 1; i < len(arr); i++ {
