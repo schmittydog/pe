@@ -9,6 +9,26 @@ const (
 	UINT16ZERO = uint16(0)
 )
 
+// NewPrimes returns a Primes struct initialized for max size n
+func NewPrimes(n int) Primes {
+	max := n
+	if n%2 == 1 {
+		max = n + 1
+	}
+	sieveLen := max/2 + 1
+	primes := Primes{sieve: make([]uint16, sieveLen), max: max}
+	for i := 3; i <= IntSqrt(max); i += 2 {
+		index := i / 2
+		p := uint16(i)
+		if primes.sieve[index] == UINT16ZERO {
+			for j := index + i; j < sieveLen; j += i {
+				primes.sieve[j] = p
+			}
+		}
+	}
+	return primes
+}
+
 // Odd prime sieve e.g. where index 0 = 1, index 1 = 3, index 2 = 5 ....
 type Primes struct {
 	sieve []uint16
@@ -30,7 +50,7 @@ func (p Primes) IsPrime(n int) bool {
 		return false
 	}
 	index := n / 2
-	return p.sieve[index] == uint16(0)
+	return p.sieve[index] == UINT16ZERO
 }
 
 // Factors returns a list of prime factors with duplicates e.g. 24 returns []int{2,2,2,3}
@@ -172,24 +192,4 @@ func (p Primes) Legendere(n int) [][]int {
 		factorTups = append(factorTups, []int{p, count})
 	}
 	return factorTups
-}
-
-// NewPrimes returns a Primes struct initialized for max size n
-func NewPrimes(n int) Primes {
-	max := n
-	if n%2 == 1 {
-		max = n + 1
-	}
-	sieveLen := max/2 + 1
-	primes := Primes{sieve: make([]uint16, sieveLen), max: max}
-	for i := 3; i <= IntSqrt(max); i += 2 {
-		index := i / 2
-		p := uint16(i)
-		if primes.sieve[index] == UINT16ZERO {
-			for j := index + i; j < sieveLen; j += i {
-				primes.sieve[j] = p
-			}
-		}
-	}
-	return primes
 }
