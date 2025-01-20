@@ -135,7 +135,7 @@ func (p Primes) Divisors(n int) []int {
 	divisors := []int{}
 
 	ch := make(chan int)
-	go p.helperDivisors(tuples, n, ch)
+	go p.helperDivisors(tuples, 1, ch)
 	for d := 0; d < numDivisors; d++ {
 		divisors = append(divisors, <-ch)
 	}
