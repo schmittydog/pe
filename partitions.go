@@ -1,4 +1,4 @@
-package main
+package pe
 
 func generatePartitions(n, index int, ch chan []int, arr []int) {
 	if n == 0 {
