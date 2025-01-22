@@ -41,3 +41,11 @@ func ArrMod(arr []int, mod int) int {
 	}
 	return ret
 }
+
+func IntSum(arr []int) int {
+	sum := 0
+	for _, num := range arr {
+		sum += num
+	}
+	return sum
+}
