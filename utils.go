@@ -30,3 +30,14 @@ func ArrToNum(arr []int) int {
 	}
 	return num
 }
+
+// Takes slice representation of number and mods it
+func ArrMod(arr []int, mod int) int {
+	ret := 0
+	for _, n := range arr {
+		ret *= 10
+		ret += n
+		ret %= mod
+	}
+	return ret
+}
