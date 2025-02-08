@@ -44,6 +44,9 @@ func (p Primes) inRange(n int) {
 
 // IsPrime returns true if prime, otherwise false
 func (p Primes) IsPrime(n int) bool {
+	if n == 2 {
+		return true
+	}
 	p.inRange(n)
 
 	if n%2 == 0 {
